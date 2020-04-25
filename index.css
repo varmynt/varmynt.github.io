@@ -1,0 +1,56 @@
+* {
+	box-sizing: border-box
+}
+body {
+	font-family: "FF DIN", "Roboto", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+	margin: 0;
+}
+h3, h4, h5, h6 {
+	font-weight: 400;
+	margin: 0;
+}
+h1, h2 {
+	font-weight: 500;
+	margin: 0;
+}
+a {
+	text-decoration: none;
+	color: inherit;
+	opacity: 50%;
+	transition: opacity 0.2s;
+}
+h1 a {
+	opacity: 100%;
+}
+a:hover {
+	opacity: 25%;
+}
+.hero {
+	display: flex;
+	align-items: center;
+	height: 100%;
+	padding: 30px;
+}
+.hero#main div {
+	position: sticky;
+}
+.hero div {
+	display: block;
+}
+.hero h1 {
+	font-size: 48pt;
+	font-weight: 500;
+}
+.hidden, .obf {
+	display: inline-block;
+	opacity: 5%;
+	transition: opacity 0.5s, filter 0.3s;
+}
+.obf {
+	opacity: inherit;
+	filter: blur(3px);
+}
+.hidden:hover, .obf:hover {
+	opacity: inherit;
+	filter: none;
+}
