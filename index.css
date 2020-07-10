@@ -6,12 +6,8 @@ body {
 	margin: 0;
 	color: #2b2b2b;
 }
-h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6 {
 	font-weight: 400;
-	margin: 0;
-}
-h1, h2 {
-	font-weight: 500;
 	margin: 0;
 }
 a {
@@ -27,6 +23,7 @@ a:hover {
 a:focus {
 	opacity: 1;
 	background-color: #2b2b2b;
+
 	color: #fff;
 }
 .hero {
@@ -49,6 +46,11 @@ a:focus {
 .hero h2 {
 	font-family: "SF Compact Rounded", "Helvetica Neue", "Helvetica", "Arial Narrow", "Arial", sans-serif;
 	font-size: 36pt;
+	font-weight: 400;
+}
+.hero h3 {
+	font-family: "SF Compact Rounded", "Helvetica Neue", "Helvetica", "Arial Narrow", "Arial", sans-serif;
+	font-size: 24pt;
 	font-weight: 300;
 }
 .hidden, .obf {
