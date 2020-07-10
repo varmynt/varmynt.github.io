@@ -1,5 +1,5 @@
 @font-face {
-    font-family: 'SFCompactRounded';
+    font-family: 'SF Compact Rounded';
     src: url('SFCompactRounded-Black.woff') format('woff');
     font-weight: 900;
     font-style: normal;
@@ -7,7 +7,7 @@
 }
 
 @font-face {
-    font-family: 'SFCompactText';
+    font-family: 'SF Compact Text';
     src: url('SFCompactText-Medium.woff') format('woff');
     font-weight: 500;
     font-style: normal;
@@ -15,7 +15,7 @@
 }
 
 @font-face {
-    font-family: 'SFCompactText';
+    font-family: 'SF Compact Text';
     src: url('SFCompactText-Light.woff') format('woff');
     font-weight: 300;
     font-style: normal;
@@ -23,7 +23,7 @@
 }
 
 @font-face {
-    font-family: 'SFCompactText';
+    font-family: 'SF Compact Text';
     src: url('SFCompactText-Semibold.woff') format('woff');
     font-weight: 600;
     font-style: normal;
@@ -31,7 +31,7 @@
 }
 
 @font-face {
-    font-family: 'SFCompactRounded';
+    font-family: 'SF Compact Rounded';
     src: url('SFCompactRounded-Heavy.woff') format('woff');
     font-weight: 900;
     font-style: normal;
@@ -39,7 +39,7 @@
 }
 
 @font-face {
-    font-family: 'SFCompactRounded';
+    font-family: 'SF Compact Rounded';
     src: url('SFCompactRounded-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
@@ -47,7 +47,7 @@
 }
 
 @font-face {
-    font-family: 'SFCompactRounded';
+    font-family: 'SF Compact Rounded';
     src: url('SFCompactRounded-Ultralight.woff') format('woff');
     font-weight: 100;
     font-style: normal;
@@ -55,7 +55,7 @@
 }
 
 @font-face {
-    font-family: 'SFCompactText';
+    font-family: 'SF Compact Text';
     src: url('SFCompactText-ThinItalic.woff') format('woff');
     font-weight: 100;
     font-style: italic;
@@ -63,7 +63,7 @@
 }
 
 @font-face {
-    font-family: 'SFCompactText';
+    font-family: 'SF Compact Text';
     src: url('SFCompactText-LightItalic.woff') format('woff');
     font-weight: 300;
     font-style: italic;
@@ -71,7 +71,7 @@
 }
 
 @font-face {
-    font-family: 'SFCompactText';
+    font-family: 'SF Compact Text';
     src: url('SFCompactText-SemiboldItalic.woff') format('woff');
     font-weight: 600;
     font-style: italic;
@@ -79,7 +79,7 @@
 }
 
 @font-face {
-    font-family: 'SFCompactRounded';
+    font-family: 'SF Compact Rounded';
     src: url('SFCompactRounded-Medium.woff') format('woff');
     font-weight: 500;
     font-style: normal;
@@ -87,7 +87,7 @@
 }
 
 @font-face {
-    font-family: 'SFCompactRounded';
+    font-family: 'SF Compact Rounded';
     src: url('SFCompactRounded-Bold.woff') format('woff');
     font-weight: bold;
     font-style: normal;
@@ -95,7 +95,7 @@
 }
 
 @font-face {
-    font-family: 'SFCompactText';
+    font-family: 'SF Compact Text';
     src: url('SFCompactText-BoldItalic.woff') format('woff');
     font-weight: bold;
     font-style: italic;
@@ -103,7 +103,7 @@
 }
 
 @font-face {
-    font-family: 'SFCompactText';
+    font-family: 'SF Compact Text';
     src: url('SFCompactText-MediumItalic.woff') format('woff');
     font-weight: 500;
     font-style: italic;
@@ -111,7 +111,7 @@
 }
 
 @font-face {
-    font-family: 'SFCompactRounded';
+    font-family: 'SF Compact Rounded';
     src: url('SFCompactRounded-Thin.woff') format('woff');
     font-weight: 100;
     font-style: normal;
@@ -119,7 +119,7 @@
 }
 
 @font-face {
-    font-family: 'SFCompactText';
+    font-family: 'SF Compact Text';
     src: url('SFCompactText-UltralightItalic.woff') format('woff');
     font-weight: 200;
     font-style: italic;
@@ -127,7 +127,7 @@
 }
 
 @font-face {
-    font-family: 'SFCompactText';
+    font-family: 'SF Compact Text';
     src: url('SFCompactText-RegularItalic.woff') format('woff');
     font-weight: normal;
     font-style: italic;
@@ -135,7 +135,7 @@
 }
 
 @font-face {
-    font-family: 'SFCompactText';
+    font-family: 'SF Compact Text';
     src: url('SFCompactText-Ultralight.woff') format('woff');
     font-weight: 100;
     font-style: normal;
@@ -143,7 +143,7 @@
 }
 
 @font-face {
-    font-family: 'SFCompactText';
+    font-family: 'SF Compact Text';
     src: url('SFCompactText-Bold.woff') format('woff');
     font-weight: bold;
     font-style: normal;
@@ -151,7 +151,7 @@
 }
 
 @font-face {
-    font-family: 'SFCompactText';
+    font-family: 'SF Compact Text';
     src: url('SFCompactText-Thin.woff') format('woff');
     font-weight: 100;
     font-style: normal;
@@ -159,7 +159,7 @@
 }
 
 @font-face {
-    font-family: 'SFCompactRounded';
+    font-family: 'SF Compact Rounded';
     src: url('SFCompactRounded-Semibold.woff') format('woff');
     font-weight: 600;
     font-style: normal;
@@ -167,7 +167,7 @@
 }
 
 @font-face {
-    font-family: 'SFCompactText';
+    font-family: 'SF Compact Text';
     src: url('SFCompactText-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
@@ -175,7 +175,7 @@
 }
 
 @font-face {
-    font-family: 'SFCompactRounded';
+    font-family: 'SF Compact Rounded';
     src: url('SFCompactRounded-Light.woff') format('woff');
     font-weight: 300;
     font-style: normal;
