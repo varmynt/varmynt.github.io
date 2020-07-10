@@ -2,7 +2,7 @@
 	box-sizing: border-box
 }
 body {
-	font-family: "SF Compact Text", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+	font-family: "SF Compact Text", system-ui, sans-serif;
 	margin: 0;
 	color: #2b2b2b;
 }
@@ -27,42 +27,31 @@ a:focus {
 	color: #fff;
 }
 .hero {
+	font-family: "SF Compact Rounded", "Helvetica Neue", "Helvetica", system-ui, "Arial", sans-serif;
 	display: flex;
 	align-items: center;
 	height: 100%;
 	padding: 30px;
 }
-.hero#main div {
-	position: sticky;
-}
 .hero div {
 	display: block;
+	text-align: center;
+	width: 100%;
 }
 .hero h1 {
-	font-family: "SF Compact Rounded", "Helvetica Neue", "Helvetica", "Arial Narrow", "Arial", sans-serif;
 	font-size: 48pt;
 	font-weight: 500;
 }
 .hero h2 {
-	font-family: "SF Compact Rounded", "Helvetica Neue", "Helvetica", "Arial Narrow", "Arial", sans-serif;
 	font-size: 36pt;
 	font-weight: 400;
 }
 .hero h3 {
-	font-family: "SF Compact Rounded", "Helvetica Neue", "Helvetica", "Arial Narrow", "Arial", sans-serif;
 	font-size: 24pt;
 	font-weight: 300;
 }
-.hidden, .obf {
-	display: inline-block;
-	opacity: 0.05;
-	transition: opacity 0.5s, filter 0.3s;
-}
-.obf {
-	opacity: inherit;
-	filter: blur(3px);
-}
-.hidden:hover, .obf:hover {
-	opacity: inherit;
-	filter: none;
+
+.hero#content div {
+	text-align: left;
+	width: fit-content;
 }
