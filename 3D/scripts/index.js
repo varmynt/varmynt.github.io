@@ -40,14 +40,17 @@ const textCanvas = document.createElement('canvas')
 textCanvas.height = 192
 textCanvas.width  = 576
 
-function createMenuItemMat(text) {
+function createMenuItemMat(text, isTitle) {
 	const textContext = textCanvas.getContext('2d')
 
 	textContext.fillStyle = "#" + COLORS.stone.getHexString()
 
 	textContext.fillRect(0, 0, textCanvas.width, textCanvas.height)
 
-	const font = "48px 'SF Compact Rounded', system-ui, 'Helvetica Neue', sans-serif"
+	var font = "48px 'SF Compact Rounded', system-ui, 'Helvetica Neue', sans-serif"
+
+	if (isTitle)
+		font = "bold " + font
 
 	textContext.font = font
 	const textPosition = Math.ceil(textCanvas.width - textContext.measureText(text).width) / 2
@@ -67,6 +70,9 @@ function createMenuItemMat(text) {
 	return [textMat, colorMat, colorMat, colorMat, colorMat, colorMat] // It's dirty, but it works.
 }
 
+const unclickable = new THREE.Object3D()
+scene.add(unclickable)
+
 var menuItems = document.getElementsByTagName('phaedra-menu-item')
 var cuboids = []
 
@@ -74,17 +80,19 @@ var offset = -1.75
 
 for (var i = 0; i < menuItems.length; i++) {
 	let currentCuboid = {
-		mesh: new THREE.Mesh(geometry, createMenuItemMat(menuItems[i].innerText)),
+		mesh: new THREE.Mesh(geometry, createMenuItemMat(menuItems[i].innerText, menuItems[i].getAttribute("is-title"))),
 		meshOffset: (i * offset),
 		href: menuItems[i].getAttribute("href")
 	}
 
 	currentCuboid.mesh.position.y = currentCuboid.meshOffset
 	cuboids.push(currentCuboid)
-}
 
-for (i in cuboids) // loops again for explicit reference to list
-	scene.add(cuboids[i].mesh)
+	if (menuItems[i].getAttribute("is-title"))
+		unclickable.add(currentCuboid.mesh)
+	else
+		scene.add(currentCuboid.mesh)
+}
 
 var pickPosition = {x: -10000, y: -10000} // unlikely to pick
 
