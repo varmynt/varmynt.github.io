@@ -4,6 +4,7 @@ const COLORS = {
 	stoneSelected: 	new THREE.Color(0xff7700),
 
 	light:			new THREE.Color(0xffffff),
+	text:			new THREE.Color(0x2b2b2b),
 }
 
 
@@ -15,19 +16,6 @@ const camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerH
 
 const canvas = document.querySelector('#mainCanvas')
 const renderer = new THREE.WebGLRenderer({canvas})
-
-const geometry = new THREE.BoxGeometry(1, 1, 2.5)
-
-const material = new THREE.MeshPhongMaterial({color: COLORS.stone})
-const materialSelected = new THREE.MeshBasicMaterial({color: COLORS.stoneSelected}) // basic material for flat appearance
-
-const cube1 = new THREE.Mesh(geometry, material)
-const cube2 = new THREE.Mesh(geometry, material)
-const cube3 = new THREE.Mesh(geometry, material)
-
-scene.add(cube1)
-scene.add(cube2)
-scene.add(cube3)
 
 const sun = new THREE.DirectionalLight(COLORS.light, 0.75)
 const ambient = new THREE.AmbientLight(COLORS.light, 0.5)
@@ -43,6 +31,28 @@ scene.add(ambient)
 camera.position.set(15, 5, 5)
 camera.lookAt(0, -1, 0)
 
+const geometry = new THREE.BoxGeometry(1, 1, 2.5)
+
+const material = new THREE.MeshPhongMaterial({color: COLORS.stone})
+const materialSelected = new THREE.MeshBasicMaterial({color: COLORS.stoneSelected}) // basic material for flat appearance
+
+var menuItems = document.getElementsByTagName('phaedra-menu-item')
+var cuboids = []
+
+var offset = -1.5
+
+for (var i = 0; i < menuItems.length; i++) {
+	let currentCuboid = {
+		mesh: new THREE.Mesh(geometry, material),
+		text: menuItems[i].innerText
+	}
+
+	currentCuboid.mesh.position.y = (i * offset)
+	cuboids.push(currentCuboid)
+}
+
+for (i in cuboids) // loops again for explicit reference to list
+	scene.add(cuboids[i].mesh)
 
 class PickHelper {
 	constructor() {
@@ -101,9 +111,11 @@ function animate(time) {
 
 	let magnitude = 0.3
 
+	/*
 	cube1.position.y = -0 + (Math.sin(time + 0.2) * magnitude)
 	cube2.position.y = -1.75 + (Math.sin(time + 0.4) * magnitude)
 	cube3.position.y = -3.5 + (Math.sin(time + 0.6) * magnitude)
+	*/
 
 	pickHelper.pick(pickPosition, scene, camera, time);
 
