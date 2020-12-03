@@ -1,7 +1,7 @@
 const COLORS = {
 	bg: 			new THREE.Color(0x6bdfff),
 	stone:			new THREE.Color(0xefefe7),
-	stoneSelected: 	new THREE.Color(0xffc400),
+	stoneSelected: 	new THREE.Color(0xff7700),
 
 	light:			new THREE.Color(0xffffff),
 }
@@ -17,7 +17,9 @@ const canvas = document.querySelector('#mainCanvas')
 const renderer = new THREE.WebGLRenderer({canvas})
 
 const geometry = new THREE.BoxGeometry(1, 1, 2.5)
+
 const material = new THREE.MeshPhongMaterial({color: COLORS.stone})
+const materialSelected = new THREE.MeshBasicMaterial({color: COLORS.stoneSelected}) // basic material for flat appearance
 
 const cube1 = new THREE.Mesh(geometry, material)
 const cube2 = new THREE.Mesh(geometry, material)
@@ -44,55 +46,57 @@ camera.lookAt(0, -1, 0)
 
 class PickHelper {
 	constructor() {
-		this.raycaster = new THREE.Raycaster();
-		this.pickedObject = null;
+		this.raycaster = new THREE.Raycaster()
+		this.pickedObject = null
 	}
 
 	pick(normalizedPosition, scene, camera, time) {
 		if (this.pickedObject) {
-			this.pickedObject.material.color.setHex(COLORS.stone);
-			this.pickedObject = undefined;
+			this.pickedObject.material = material
+			this.pickedObject = undefined
 		}
 
-		this.raycaster.setFromCamera(normalizedPosition, camera);
+		this.raycaster.setFromCamera(normalizedPosition, camera)
 
-		const intersectedObjects = this.raycaster.intersectObjects(scene.children);
+		const intersectedObjects = this.raycaster.intersectObjects(scene.children)
 
 		if (intersectedObjects.length != 0) {
-			this.pickedObject = intersectedObjects[0].object;
-			this.pickedObject.material.color.setHex(COLORS.stoneSelected);
+			this.pickedObject = intersectedObjects[0].object
+			this.pickedObject.material = materialSelected
 		}
 	}
 }
 
-const pickPosition = {x: 0, y: 0};
+const pickPosition = {x: -10000, y: -10000} // unlikely to pick
  
 function getCanvasRelativePosition(event) {
-	const rect = canvas.getBoundingClientRect();
+	const rect = canvas.getBoundingClientRect()
 	return {
 		x: (event.clientX - rect.left) * canvas.width	/ rect.width,
 		y: (event.clientY - rect.top ) * canvas.height	/ rect.height,
-	};
+	}
 }
  
 function setPickPosition(event) {
-	const pos = getCanvasRelativePosition(event);
-	pickPosition.x = (pos.x / canvas.width ) *	2 - 1;
-	pickPosition.y = (pos.y / canvas.height) * -2 + 1;	// Y is flipped
+	const pos = getCanvasRelativePosition(event)
+	pickPosition.x = (pos.x / canvas.width ) *	2 - 1
+	pickPosition.y = (pos.y / canvas.height) * -2 + 1	// Y is flipped
 }
 
-window.addEventListener('mousemove', setPickPosition);
+window.addEventListener('mousemove', setPickPosition)
 
+const pickHelper = new PickHelper()
 
 function animate(time) {
 	time *= 0.001
-	const canvas = renderer.domElement;
 
-	camera.aspect = canvas.clientWidth / canvas.clientHeight;
-	camera.updateProjectionMatrix();
+	const canvas = renderer.domElement
+
+	camera.aspect = canvas.clientWidth / canvas.clientHeight
+	camera.updateProjectionMatrix()
 
 	if (canvas.width !== canvas.clientWidth || canvas.height !== canvas.clientHeight) {
-		renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+		renderer.setSize(canvas.clientWidth, canvas.clientHeight, false)
 	}
 
 	let magnitude = 0.3
@@ -100,6 +104,8 @@ function animate(time) {
 	cube1.position.y = -0 + (Math.sin(time + 0.2) * magnitude)
 	cube2.position.y = -1.75 + (Math.sin(time + 0.4) * magnitude)
 	cube3.position.y = -3.5 + (Math.sin(time + 0.6) * magnitude)
+
+	pickHelper.pick(pickPosition, scene, camera, time);
 
 	renderer.render(scene, camera)
 	requestAnimationFrame(animate)
