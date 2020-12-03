@@ -1,10 +1,12 @@
 const COLORS = {
 	bg: 			new THREE.Color(0x6bdfff),
-	stone:			new THREE.Color(0xefefe7),
+	stone:			new THREE.Color(0x352f2b),
 	stoneSelected: 	new THREE.Color(0xff7700),
 
 	light:			new THREE.Color(0xffffff),
-	text:			new THREE.Color(0x2b2b2b),
+	text:			new THREE.Color(0xeeeeee),
+
+	black:			new THREE.Color(0x000000),
 }
 
 
@@ -31,10 +33,39 @@ scene.add(ambient)
 camera.position.set(15, 5, 5)
 camera.lookAt(0, -1, 0)
 
-const geometry = new THREE.BoxGeometry(1, 1, 2.5)
+const geometry = new THREE.BoxGeometry(1, 1, 3)
 
-const material = new THREE.MeshPhongMaterial({color: COLORS.stone})
-const materialSelected = new THREE.MeshBasicMaterial({color: COLORS.stoneSelected}) // basic material for flat appearance
+const textCanvas = document.createElement('canvas')
+
+textCanvas.height = 192
+textCanvas.width  = 576
+
+function createMenuItemMat(text) {
+	const textContext = textCanvas.getContext('2d')
+
+	textContext.fillStyle = COLORS.stone.getHexString()
+
+	textContext.fillRect(0, 0, textCanvas.width, textCanvas.height)
+
+	const font = "48px system-ui, 'Menlo', sans-serif"
+
+	textContext.font = font
+	const textPosition = Math.ceil(textCanvas.width - textContext.measureText(text).width) / 2
+
+	textContext.font = font // textContext.font must be set twice (because WebKit clears textContext.font after measureText now apparently!)
+	textContext.fillStyle = COLORS.text.getHexString()
+	textContext.fillText(text, textPosition, 112)
+
+	const textMap = new THREE.Texture(textContext.getImageData(0, 0, textCanvas.width, textCanvas.height))
+	textMap.minFilter = THREE.LinearFilter
+	textMap.generateMipmaps = false
+	textMap.needsUpdate = true // so that one canvas can be used for multiple labels
+
+	const textMat = new THREE.MeshPhongMaterial({map: textMap})
+	const colorMat = new THREE.MeshPhongMaterial({color: COLORS.stone})
+
+	return [textMat, colorMat, colorMat, colorMat, colorMat, colorMat] // It's dirty, but it works.
+}
 
 var menuItems = document.getElementsByTagName('phaedra-menu-item')
 var cuboids = []
@@ -43,7 +74,7 @@ var offset = -1.75
 
 for (var i = 0; i < menuItems.length; i++) {
 	let currentCuboid = {
-		mesh: new THREE.Mesh(geometry, material),
+		mesh: new THREE.Mesh(geometry, createMenuItemMat(menuItems[i].innerText)),
 		meshOffset: (i * offset),
 		text: menuItems[i].innerText
 	}
@@ -63,7 +94,8 @@ class PickHelper {
 
 	pick(normalizedPosition, scene, camera, time) {
 		if (this.pickedObject) {
-			this.pickedObject.material = material
+			for (i in this.pickedObject.material)
+				this.pickedObject.material[i].emissive = COLORS.black
 			this.pickedObject = undefined
 		}
 
@@ -73,7 +105,8 @@ class PickHelper {
 
 		if (intersectedObjects.length != 0) {
 			this.pickedObject = intersectedObjects[0].object
-			this.pickedObject.material = materialSelected
+			for (i in this.pickedObject.material)
+				this.pickedObject.material[i].emissive = COLORS.stoneSelected
 		}
 	}
 }
