@@ -111,12 +111,12 @@ class PickHelper {
 			this.pickedObject = intersectedObjects[0].object
 			for (i in this.pickedObject.material)
 				this.pickedObject.material[i].emissive = COLORS.stoneSelected
+		}
 
-			if (this.isClick == true) {
-				this.isClick = false
-				pickPosition = {x: -10000, y: -10000}
-				for (i in cuboids) if (cuboids[i].mesh === this.pickedObject) window.location.href = cuboids[i].href
-			}
+		if (this.isClick == true) {
+			this.isClick = false
+			pickPosition = {x: -10000, y: -10000}
+			for (i in cuboids) if (cuboids[i].mesh === this.pickedObject) window.location.href = cuboids[i].href
 		}
 	}
 }
