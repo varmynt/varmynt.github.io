@@ -39,15 +39,16 @@ const materialSelected = new THREE.MeshBasicMaterial({color: COLORS.stoneSelecte
 var menuItems = document.getElementsByTagName('phaedra-menu-item')
 var cuboids = []
 
-var offset = -1.5
+var offset = -1.75
 
 for (var i = 0; i < menuItems.length; i++) {
 	let currentCuboid = {
 		mesh: new THREE.Mesh(geometry, material),
+		meshOffset: (i * offset),
 		text: menuItems[i].innerText
 	}
 
-	currentCuboid.mesh.position.y = (i * offset)
+	currentCuboid.mesh.position.y = currentCuboid.meshOffset
 	cuboids.push(currentCuboid)
 }
 
@@ -110,12 +111,11 @@ function animate(time) {
 	}
 
 	let magnitude = 0.3
+	let shift = 0.2
 
-	/*
-	cube1.position.y = -0 + (Math.sin(time + 0.2) * magnitude)
-	cube2.position.y = -1.75 + (Math.sin(time + 0.4) * magnitude)
-	cube3.position.y = -3.5 + (Math.sin(time + 0.6) * magnitude)
-	*/
+	for (i in cuboids) {
+		cuboids[i].mesh.position.y = cuboids[i].meshOffset + (Math.sin(time + (i * shift)) * magnitude)
+	}
 
 	pickHelper.pick(pickPosition, scene, camera, time);
 
