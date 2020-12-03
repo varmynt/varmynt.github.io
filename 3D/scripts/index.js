@@ -1,9 +1,9 @@
 const COLORS = {
-	bg: 	new THREE.Color(0x6bdfff),
-	stone: 	new THREE.Color(0xdeded7),
+	bg: 			new THREE.Color(0x6bdfff),
+	stone:			new THREE.Color(0xefefe7),
+	stoneSelected: 	new THREE.Color(0xffc400),
 
-	lightUp:	new THREE.Color(0xffffff),
-	lightDown:	new THREE.Color(0xbbeeff),
+	light:			new THREE.Color(0xffffff),
 }
 
 
@@ -17,24 +17,19 @@ const renderer = new THREE.WebGLRenderer()
 renderer.setSize(window.innerWidth, window.innerHeight)
 document.body.appendChild(renderer.domElement)
 
-const geometry = new THREE.BoxGeometry()
+const geometry = new THREE.BoxGeometry(1, 1, 2.5)
 const material = new THREE.MeshPhongMaterial({color: COLORS.stone})
 
 const cube1 = new THREE.Mesh(geometry, material)
-cube1.position.set(0, 2, 0)
-
 const cube2 = new THREE.Mesh(geometry, material)
-cube2.position.set(0, 0, 0)
-
 const cube3 = new THREE.Mesh(geometry, material)
-cube3.position.set(0, -2, 0)
 
 scene.add(cube1)
 scene.add(cube2)
 scene.add(cube3)
 
-const sun = new THREE.DirectionalLight(COLORS.lightUp, 0.75)
-const ambient = new THREE.AmbientLight(COLORS.lightUp, 0.5)
+const sun = new THREE.DirectionalLight(COLORS.light, 0.75)
+const ambient = new THREE.AmbientLight(COLORS.light, 0.5)
 
 sun.position.set(2.5, 5, 0)
 sun.target.position.set(0, 0, 0)
@@ -44,21 +39,21 @@ scene.add(sun.target)
 
 scene.add(ambient)
 
-camera.position.set(10, 10, 10)
-camera.lookAt(0, 0, 0)
+camera.position.set(15, 5, 5)
+camera.lookAt(0, -1, 0)
 
 var delta = 0
-var y = 0
 
 function animate() {
 	requestAnimationFrame(animate)
 
-	delta += 0.05
+	delta += 0.01
 
-	y = Math.sin(delta) * 1.5
+	let magnitude = 0.3
 
-	camera.position.set(10, 10 + y, 10)
-	camera.lookAt(0, y, 0)
+	cube1.position.y = -0 + (Math.sin(delta + 0.2) * magnitude)
+	cube2.position.y = -1.75 + (Math.sin(delta + 0.4) * magnitude)
+	cube3.position.y = -3.5 + (Math.sin(delta + 0.6) * magnitude)
 
 	renderer.render(scene, camera)
 }
