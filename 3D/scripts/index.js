@@ -17,7 +17,7 @@ scene.background = COLORS.bg
 const camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 0.1, 1000)
 
 const canvas = document.querySelector('#mainCanvas')
-const renderer = new THREE.WebGLRenderer({canvas})
+const renderer = new THREE.WebGLRenderer({canvas, antialias: true})
 
 const sun = new THREE.DirectionalLight(COLORS.light, 0.75)
 const ambient = new THREE.AmbientLight(COLORS.light, 0.5)
@@ -143,6 +143,8 @@ window.addEventListener('mousemove', setPickPosition)
 window.addEventListener('mousedown', function (event) {pickHelper.isClick = true})
 window.addEventListener('touchstart', function (event) {pickHelper.isClick = true})
 
+renderer.setPixelRatio(window.devicePixelRatio) // set dpi for Retina display
+
 function animate(time) {
 	time *= 0.001
 
@@ -155,11 +157,14 @@ function animate(time) {
 		renderer.setSize(canvas.clientWidth, canvas.clientHeight, false)
 	}
 
-	let magnitude = 0.3
-	let shift = 0.2
+	let xMagnitude = 0.1
+	let yMagnitude = 0.3
+	let xShift = 0.2
+	let yShift = 0.5
 
 	for (i in cuboids) {
-		cuboids[i].mesh.position.y = cuboids[i].meshOffset + (Math.sin(time + (i * shift)) * magnitude)
+		cuboids[i].mesh.position.y = cuboids[i].meshOffset + (Math.sin(time + (i * xShift)) * yMagnitude)
+		cuboids[i].mesh.position.x = (Math.cos(time + (i * yShift)) * xMagnitude)
 	}
 
 	pickHelper.pick(pickPosition, scene, camera, time);
