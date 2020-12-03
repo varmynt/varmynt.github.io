@@ -30,8 +30,8 @@ scene.add(sun.target)
 
 scene.add(ambient)
 
-camera.position.set(15, 5, 5)
-camera.lookAt(0, -1, 0)
+camera.position.set(15, 3.5, 5)
+camera.lookAt(0, -2, 0)
 
 const geometry = new THREE.BoxGeometry(1, 1, 3)
 
@@ -88,10 +88,10 @@ for (var i = 0; i < menuItems.length; i++) {
 	currentCuboid.mesh.position.y = currentCuboid.meshOffset
 	cuboids.push(currentCuboid)
 
-	if (menuItems[i].getAttribute("is-title"))
-		unclickable.add(currentCuboid.mesh)
-	else
+	if (menuItems[i].getAttribute("href"))
 		scene.add(currentCuboid.mesh)
+	else
+		unclickable.add(currentCuboid.mesh)
 }
 
 var pickPosition = {x: -10000, y: -10000} // unlikely to pick
