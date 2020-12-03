@@ -64,8 +64,6 @@ function createMenuItemMat(text) {
 	const textMat = new THREE.MeshPhongMaterial({map: textMap})
 	const colorMat = new THREE.MeshPhongMaterial({color: COLORS.stone})
 
-
-
 	return [textMat, colorMat, colorMat, colorMat, colorMat, colorMat] // It's dirty, but it works.
 }
 
@@ -144,6 +142,20 @@ window.addEventListener('mousedown', function (event) {pickHelper.isClick = true
 window.addEventListener('touchstart', function (event) {pickHelper.isClick = true})
 
 renderer.setPixelRatio(window.devicePixelRatio) // set dpi for Retina display
+
+var pixelDownsample = 1
+const qualityButton = document.querySelector('#qualityButton')
+
+function toggleQuality() {
+	if (pixelDownsample == 1) {
+		pixelDownsample = 2
+		qualityButton.src = "./assets/high-res-btn.svg"
+	} else {
+		pixelDownsample = 1
+		qualityButton.src = "./assets/low-res-btn.svg"
+	}
+	renderer.setPixelRatio(window.devicePixelRatio / pixelDownsample)
+}
 
 function animate(time) {
 	time *= 0.001

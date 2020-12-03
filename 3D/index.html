@@ -18,13 +18,29 @@
 	phaedra-menu-item {
 		display: none;
 	}
+	#qualityButton {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		width: 30px;
+		height: 30px;
+		
+		opacity: 25%;
+		transition: 0.2s;
+	}
+	#qualityButton:hover {
+		opacity: 75%;
+	}
 	</style>
 </head>
 <body>
 	<canvas id="mainCanvas"></canvas>
 
+	<phaedra-menu-title>Hello, world!</phaedra-menu-title>
 	<phaedra-menu-item href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Click for fun.</phaedra-menu-item>
 	<phaedra-menu-item>(I'm sorry.)</phaedra-menu-item>
+
+	<img src="./assets/low-res-btn.svg" id="qualityButton" onclick="toggleQuality()" title="Quality"/>
 	
 	<script src="scripts/modules/three.js"></script>
 	<script src="scripts/index.js"></script>
