@@ -4,7 +4,7 @@ const COLORS = {
 	stoneSelected: 	new THREE.Color(0xff7700),
 
 	light:			new THREE.Color(0xffffff),
-	text:			new THREE.Color(0xeeeeee),
+	text:			new THREE.Color(0xfafafa),
 
 	black:			new THREE.Color(0x000000),
 }
@@ -43,17 +43,17 @@ textCanvas.width  = 576
 function createMenuItemMat(text) {
 	const textContext = textCanvas.getContext('2d')
 
-	textContext.fillStyle = COLORS.stone.getHexString()
+	textContext.fillStyle = "#" + COLORS.stone.getHexString()
 
 	textContext.fillRect(0, 0, textCanvas.width, textCanvas.height)
 
-	const font = "48px system-ui, 'Menlo', sans-serif"
+	const font = "48px 'SF Compact Rounded', system-ui, 'Helvetica Neue', sans-serif"
 
 	textContext.font = font
 	const textPosition = Math.ceil(textCanvas.width - textContext.measureText(text).width) / 2
 
 	textContext.font = font // textContext.font must be set twice (because WebKit clears textContext.font after measureText now apparently!)
-	textContext.fillStyle = COLORS.text.getHexString()
+	textContext.fillStyle = "#" +  COLORS.text.getHexString()
 	textContext.fillText(text, textPosition, 112)
 
 	const textMap = new THREE.Texture(textContext.getImageData(0, 0, textCanvas.width, textCanvas.height))
@@ -63,6 +63,8 @@ function createMenuItemMat(text) {
 
 	const textMat = new THREE.MeshPhongMaterial({map: textMap})
 	const colorMat = new THREE.MeshPhongMaterial({color: COLORS.stone})
+
+
 
 	return [textMat, colorMat, colorMat, colorMat, colorMat, colorMat] // It's dirty, but it works.
 }
@@ -139,6 +141,7 @@ const pickHelper = new PickHelper()
 
 window.addEventListener('mousemove', setPickPosition)
 window.addEventListener('mousedown', function (event) {pickHelper.isClick = true})
+window.addEventListener('touchstart', function (event) {pickHelper.isClick = true})
 
 function animate(time) {
 	time *= 0.001
