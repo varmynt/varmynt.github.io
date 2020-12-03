@@ -76,7 +76,7 @@ for (var i = 0; i < menuItems.length; i++) {
 	let currentCuboid = {
 		mesh: new THREE.Mesh(geometry, createMenuItemMat(menuItems[i].innerText)),
 		meshOffset: (i * offset),
-		text: menuItems[i].innerText
+		href: menuItems[i].getAttribute("href")
 	}
 
 	currentCuboid.mesh.position.y = currentCuboid.meshOffset
@@ -86,10 +86,14 @@ for (var i = 0; i < menuItems.length; i++) {
 for (i in cuboids) // loops again for explicit reference to list
 	scene.add(cuboids[i].mesh)
 
+var pickPosition = {x: -10000, y: -10000} // unlikely to pick
+
 class PickHelper {
 	constructor() {
 		this.raycaster = new THREE.Raycaster()
 		this.pickedObject = null
+
+		this.isClick = false
 	}
 
 	pick(normalizedPosition, scene, camera, time) {
@@ -107,11 +111,15 @@ class PickHelper {
 			this.pickedObject = intersectedObjects[0].object
 			for (i in this.pickedObject.material)
 				this.pickedObject.material[i].emissive = COLORS.stoneSelected
+
+			if (this.isClick == true) {
+				this.isClick = false
+				pickPosition = {x: -10000, y: -10000}
+				for (i in cuboids) if (cuboids[i].mesh === this.pickedObject) window.location.href = cuboids[i].href
+			}
 		}
 	}
 }
-
-const pickPosition = {x: -10000, y: -10000} // unlikely to pick
  
 function getCanvasRelativePosition(event) {
 	const rect = canvas.getBoundingClientRect()
@@ -127,9 +135,10 @@ function setPickPosition(event) {
 	pickPosition.y = (pos.y / canvas.height) * -2 + 1	// Y is flipped
 }
 
-window.addEventListener('mousemove', setPickPosition)
-
 const pickHelper = new PickHelper()
+
+window.addEventListener('mousemove', setPickPosition)
+window.addEventListener('mousedown', function (event) {pickHelper.isClick = true})
 
 function animate(time) {
 	time *= 0.001
