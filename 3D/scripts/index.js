@@ -165,22 +165,22 @@ function toggleQuality() {
 	renderer.setPixelRatio(window.devicePixelRatio / pixelDownsample)
 }
 
+
+let xMagnitude = 0.1
+let yMagnitude = 0.3
+let xShift = 0.2
+let yShift = 0.5
+
+
 function animate(time) {
 	time *= 0.001
 
-	const canvas = renderer.domElement
-
-	camera.aspect = canvas.clientWidth / canvas.clientHeight
-	camera.updateProjectionMatrix()
-
 	if (canvas.width !== canvas.clientWidth || canvas.height !== canvas.clientHeight) {
+		camera.aspect = canvas.clientWidth / canvas.clientHeight
+		camera.updateProjectionMatrix()
+		
 		renderer.setSize(canvas.clientWidth, canvas.clientHeight, false)
 	}
-
-	let xMagnitude = 0.1
-	let yMagnitude = 0.3
-	let xShift = 0.2
-	let yShift = 0.5
 
 	for (i in cuboids) {
 		cuboids[i].mesh.position.y = cuboids[i].meshOffset + (Math.sin(time + (i * xShift)) * yMagnitude)
