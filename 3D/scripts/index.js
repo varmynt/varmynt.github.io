@@ -149,10 +149,16 @@ window.addEventListener('mousemove', setPickPosition)
 window.addEventListener('mousedown', function (event) {pickHelper.isClick = true})
 window.addEventListener('touchstart', function (event) {pickHelper.isClick = true})
 
-renderer.setPixelRatio(window.devicePixelRatio) // set dpi for Retina display
-
-var pixelDownsample = 1
 const qualityButton = document.querySelector('#qualityButton')
+var pixelDownsample = 1
+
+if (window.devicePixelRatio > 1) {
+	pixelDownsample = 2
+	qualityButton.src = "./assets/high-res-btn.svg"
+} else
+	pixelDownsample = 1
+
+renderer.setPixelRatio(window.devicePixelRatio / pixelDownsample) // set dpi for Retina display
 
 function toggleQuality() {
 	if (pixelDownsample == 1) {
@@ -178,7 +184,7 @@ function animate(time) {
 	if (canvas.width !== canvas.clientWidth || canvas.height !== canvas.clientHeight) {
 		camera.aspect = canvas.clientWidth / canvas.clientHeight
 		camera.updateProjectionMatrix()
-		
+
 		renderer.setSize(canvas.clientWidth, canvas.clientHeight, false)
 	}
 
