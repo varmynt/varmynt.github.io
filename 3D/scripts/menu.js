@@ -1,15 +1,3 @@
-const COLORS = {
-	bg: 			new THREE.Color(0x6bdfff),
-	stone:			new THREE.Color(0x352f2b),
-	stoneSelected: 	new THREE.Color(0xff7700),
-
-	light:			new THREE.Color(0xffffff),
-	text:			new THREE.Color(0xfafafa),
-
-	black:			new THREE.Color(0x000000),
-}
-
-
 const scene = new THREE.Scene()
 
 scene.background = COLORS.bg
