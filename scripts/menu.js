@@ -18,8 +18,8 @@ scene.add(sun.target)
 
 scene.add(ambient)
 
-camera.position.set(15, 3.5, 5)
-camera.lookAt(0, -2, 0)
+camera.position.set(15, 1.5, 3.5)
+camera.lookAt(0, -2.5, 0)
 
 const geometry = new THREE.BoxGeometry(1, 1, 3)
 
@@ -64,7 +64,7 @@ scene.add(unclickable)
 var menuItems = document.getElementsByTagName('phaedra-menu-item')
 var cuboids = []
 
-var offset = -1.75
+var offset = -1.65
 
 for (var i = 0; i < menuItems.length; i++) {
 	let currentCuboid = {
