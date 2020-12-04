@@ -1,23 +1,35 @@
+<!DOCTYPE html>
 <html>
 <head>
-	<title>jules h.</title>
-	<link rel=stylesheet href="./SFCompact/SFCompact.css">
-	<link rel=stylesheet href="./index.css">
+	<title>Phaedra's 3D Magic Sandbox</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/SFCompact/SFCompact.css">
+	<link rel="stylesheet" href="assets/menu.css">
 </head>
 <body>
-	<div class=hero id=main>
-		<div>
-			<h1>juliene hawkins.</h1>
-			<h2><a href="/music">music</a>; <a href="/code">computers</a>; <a href="#content">everything else</a>.</h2>
-		</div>
-	</div>
-		<div class=hero id=content>
-			<div>
-			<h2>my projects</h2>
-				<ul>
-					<li>MIDI-fying a clarinet (link coming soon)</li>
-				</ul>
-			</div>
-	</div>
+	<canvas id="mainCanvas"></canvas>
+
+	<phaedra-menu-item is-title="true">Hello, world!</phaedra-menu-item>
+	<phaedra-menu-item href="projects.html">&middot; projects &middot;</phaedra-menu-item>
+	<phaedra-menu-item href="writing.html">&middot; writing &middot;</phaedra-menu-item>
+
+	<img src="./assets/low-res-btn.svg" id="qualityButton" onclick="toggleQuality()" title="Quality"/>
+	
+	<script src="scripts/modules/three.js"></script>
+
+	<script>
+	const COLORS = {
+		bg: 			new THREE.Color(0x6bdfff),
+		stone:			new THREE.Color(0x352f2b),
+		stoneSelected: 	new THREE.Color(0xff7700),
+
+		light:			new THREE.Color(0xffffff),
+		text:			new THREE.Color(0xffffff),
+
+		black:			new THREE.Color(0x000000),
+	}
+	</script>
+
+	<script src="scripts/menu.js"></script>
 </body>
 </html>
