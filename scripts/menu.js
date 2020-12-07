@@ -161,13 +161,13 @@ function toggleQuality() {
 
 
 let xMagnitude = 0.1
-let yMagnitude = 0.3
+let yMagnitude = 0.15
 let xShift = 0.2
 let yShift = 0.5
 
 
 function animate(time) {
-	time *= 0.001
+	time *= 0.0005
 
 	if (canvas.width !== canvas.clientWidth || canvas.height !== canvas.clientHeight) {
 		camera.aspect = canvas.clientWidth / canvas.clientHeight
